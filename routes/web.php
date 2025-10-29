@@ -9,7 +9,7 @@ use App\Http\Controllers\MagazijnController;
 
 // Homepagina
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('magazijn');
 })->name('home');
 
 // Magazijn overzicht

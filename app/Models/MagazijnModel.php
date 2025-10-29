@@ -2,16 +2,42 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
-class MagazijnModel
+class MagazijnModel extends Model
 {
-    public function sp_GetAllProducts()
+    public static function sp_GetAllProducts()
     {
-        return DB::table('Magazijn as m')
-            ->join('Product as p', 'm.ProductId', '=', 'p.Id')
-            ->orderBy('p.Barcode', 'asc')
-            ->select('m.*', 'p.Naam', 'p.Barcode')
-            ->get();
+        return DB::select('CALL sp_GetAllProducts()');
+    }
+
+    // public static function sp_GetLeveringInfo($product_id)
+    // {
+    //     return DB::select('CALL sp_GetLeveringInfo(?)', [$product_id]);
+    // }
+
+    public static function sp_GetProductById($id)
+    {
+        return DB::selectOne('CALL sp_GetProductById(?)',[$id]);
+    }
+
+    public static function sp_GetAllLeveringen($product_id)
+    {
+        return DB::select('CALL sp_GetAllLeveringen(?)',[$product_id]);
+    }
+
+    public static function sp_GetMagazijnData($product_id)
+    {
+        return DB::selectOne('CALL sp_GetMagazijndata(?)', [$product_id]);
+    }
+
+    public static function sp_GetAllgergeenByProductId($product_id)
+    {
+        return DB::select('CALL sp_GetAllgergeenByProductId(:id)',[
+            'id' => $product_id
+        ]);
     }
 }
+

@@ -9,11 +9,18 @@ CREATE PROCEDURE sp_UpdateAllergeen(
 )
 BEGIN
 
-    UPDATE   Allergeen
-    SET      Naam = p_naam
-            ,Omschrijving = p_omschrijving
-            ,DatumGewijzigd = SYSDATE(6) 
-    WHERE   Id = p_id;
+    UPDATE   
+        Allergeen
+    SET      
+        Naam = p_naam
+        ,Omschrijving = p_omschrijving
+        ,DatumGewijzigd = SYSDATE(6) 
+    WHERE   
+        Id = p_id
+    AND
+        (Naam != p_naam 
+    OR
+        Omschrijving != p_omschrijving);
 
     SELECT ROW_COUNT() as affected;
 

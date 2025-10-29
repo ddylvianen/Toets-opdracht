@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AllergeenModel;
+
 use Illuminate\Http\Request;
 
-class AllergeenController extends Controller
+class AllergeenController
 {
     private $allergeenModel;
 
@@ -49,8 +50,6 @@ class AllergeenController extends Controller
             'name' => 'required|string|max:50',
             'description' => 'required|string|max:255'
         ]);
-
-        // dd($data);
 
         $newId = $this->allergeenModel->sp_CreateAllergeen(
             $data['name'],
@@ -105,13 +104,10 @@ class AllergeenController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //dd($request->all());
         $validated = $request->validate([
             'naam' => ['required', 'string', 'max:50'],
             'omschrijving' => ['required', 'string', 'max:255']
         ]);
-
-        // dd($validated);
 
         $affected = $this->allergeenModel->sp_UpdateAllergeen(
             $id,
@@ -120,7 +116,7 @@ class AllergeenController extends Controller
         );
 
         if ($affected === 0){
-            return back()->with('error', 'Er is niets gewijzigd of error bestaat niet');
+            return back()->with('error', 'Er is niets gewijzigd');
         }
 
         return redirect()->route('allergeen.index')

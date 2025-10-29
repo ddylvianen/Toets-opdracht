@@ -9,8 +9,6 @@
 <body>
 <div class="container mt-5">
     <h2>Magazijn</h2>
-
-    {{-- ✅ Productinformatie --}}
     @if(isset($product))
         <div class="mb-3 p-3 border rounded shadow-sm bg-light">
             <p><strong>Productnaam:</strong> {{ $product->Naam }}</p>
@@ -23,7 +21,7 @@
             {{ $message }}
         </div>
         <meta http-equiv="refresh" content="4;url={{ route('magazijn.index') }}">
-    @elseif(isset($allergenen) && $allergenen->count() > 0)
+    @elseif(isset($allergenen))
         <table class="table table-striped table-bordered align-middle shadow-sm mt-3">
             <thead class="table-dark">
                 <tr>

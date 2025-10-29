@@ -45,16 +45,16 @@
                         <tr>
                             <td>{{ $product->Barcode }}</td>
                             <td>{{ $product->Naam }}</td>
-                            <td>{{ $product->Verpakkingseenheid ?? '' }}</td>
+                            <td>{{ $product->VerpakkingsEenheid ?? '' }}</td>
                             <td>{{ $product->AantalAanwezig }}</td>
                             <td>
-                                <a href="{{ route('magazijn.allergenen', $product->ProductId) }}"
+                                <a href="{{ route('magazijn.allergenen', $product->Id) }}"
                                    class="btn btn-warning btn-sm">
                                    Allergenen Info
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('magazijn.levering', $product->ProductId) }}"
+                                <a href="{{ route('magazijn.levering', $product->Id) }}"
                                    class="btn btn-info btn-sm">
                                    Leverantie Info
                                 </a>
