@@ -23,6 +23,8 @@
                     <th>Allergeen Naam</th>
                     <th>Omschrijving</th>
                 </tr>
+
+                
             </thead>
             <tbody>
                 @if (isset($message))
