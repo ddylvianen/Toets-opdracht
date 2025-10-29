@@ -14,8 +14,9 @@ BEGIN
             ,MAGA.AantalAanwezig        AS AantalAanwezig
 	FROM Product AS PROD    
     INNER JOIN Magazijn AS MAGA
-    ON PROD.Id = MAGA.ProductId;
+    ON PROD.Id = MAGA.ProductId
+    ORDER BY Barcode ASC;
 
 END$$
 
-DELIMITER ;
+DELIMITER;
