@@ -31,9 +31,9 @@ BEGIN
         ,lvr.Contactpersoon
         ,lvr.Leveranciernummer
         ,lvr.Mobiel
-        ,ppl.DatumLevering
+        ,DATE_FORMAT(ppl.DatumLevering, '%d-%m-%Y') AS DatumLevering
         ,ppl.Aantal
-        ,ppl.DatumEerstVolgendeLevering
+        ,DATE_FORMAT(ppl.DatumEerstVolgendeLevering, '%d-%m-%Y') AS DatumEerstVolgendeLevering
     FROM
         Leverancier AS lvr
     JOIN

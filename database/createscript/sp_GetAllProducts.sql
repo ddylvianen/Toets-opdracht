@@ -10,7 +10,8 @@ BEGIN
     SELECT 	 PROD.Id                    AS Id
 			,PROD.Naam                  AS Naam
 			,PROD.Barcode               AS Barcode
-            ,MAGA.VerpakkingsEenheid    AS VerpakkingsEenheid
+            ,IF(MAGA.VerpakkingsEenheid % 1 = 0,ROUND(MAGA.VerpakkingsEenheid),
+             MAGA.VerpakkingsEenheid) AS VerpakkingsEenheid
             ,MAGA.AantalAanwezig        AS AantalAanwezig
 	FROM Product AS PROD    
     INNER JOIN Magazijn AS MAGA
