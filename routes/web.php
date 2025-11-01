@@ -6,6 +6,7 @@ use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AllergeenController;
 use App\Http\Controllers\MagazijnController;
+use App\Http\Controllers\LeverancierController;
 
 // Homepagina
 Route::get('/', function () {
@@ -42,6 +43,11 @@ Route::put('/allergeen/{id}', [AllergeenController::class, 'update'])->name('all
 // Tonen van allergeen details
 Route::get('/allergeen/{id}', [AllergeenController::class, 'show'])->name('allergeen.show');
 
+// Tonen van leveranciers
+Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leverancier.index');
+
+// Tonen van producten info
+Route::get('/producten/{id}', [LeverancierController::class,'productenperleverancier'])->name('leverancier.producteninfo');
 // Dashboard (met auth middleware)
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
