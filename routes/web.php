@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AllergeenController;
 use App\Http\Controllers\MagazijnController;
 use App\Http\Controllers\LeverancierController;
+use App\Models\LeverancierModel;
 
 // Homepagina
 Route::get('/', function () {
@@ -48,6 +49,12 @@ Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leve
 
 // Tonen van producten info
 Route::get('/producten/{id}', [LeverancierController::class,'show'])->name('leverancier.producteninfo');
+
+Route::get('/leveranciers/{lvrnid}/{prdid}/create', [LeverancierController::class, 'create'])->name('leverancier.create');
+
+Route::put('/leveranciers', [LeverancierController::class, 'store'])->name('leverancier.store');
+
+// RouteLL
 // Dashboard (met auth middleware)
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LeverancierModel;
+use App\Models\MagazijnModel;
 use Illuminate\Http\Request;
 
 class LeverancierController 
@@ -19,11 +20,15 @@ class LeverancierController
     public function show($id){
         $leverancier = LeverancierModel::sp_getleverancierbyid($id);
         $producten = LeverancierModel::sp_getallproductenperleverancier($id);
-        return dd($leverancier, $producten);
+        return view('leveranciers.producten_info', compact('leverancier', 'producten'));
+        // return dd($leverancier, $producten);
     }
 
-    public function create(){
-       return view('leveranciers.create');
+    public function create($lvnid,$prdid){
+        $leverancier = LeverancierModel::sp_getleverancierbyid($lvnid);
+        $product = MagazijnModel::sp_GetProductById($prdid);
+        // return dd($leverancier, $product);
+       return view('leveranciers.create', compact('leverancier', 'product'));
     }
 
     public function store(Request $request){

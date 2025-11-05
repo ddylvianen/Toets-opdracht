@@ -6,25 +6,24 @@ CREATE PROCEDURE SP_GetAllProductenperleverancier(
 )
 BEGIN
     SELECT
-        prd.Naam
-        ,mag.AantalAanwezig AS Aantal
-        ,IF(mag.VerpakkingsEenheid % 1 = 0,ROUND(mag.VerpakkingsEenheid),
-        mag.VerpakkingsEenheid) AS Eenheid
-        ,MAX(ppl.`DatumLevering`) AS `DatumLevering`
-    FROM
-        Product AS prd
-    JOIN
-        Magazijn AS mag
-        ON mag.ProductId = prd.Id
-    JOIN
-        ProductPerLeverancier AS ppl
-        ON ppl.ProductId = prd.Id
-        AND ppl.LeverancierId = lvrn_id
-    GROUP BY
         prd.Id,
         prd.Naam,
-        mag.AantalAanwezig,
-        Eenheid;
+        mag.AantalAanwezig AS Aantal,
+        IF(
+            mag.VerpakkingsEenheid = FLOOR(mag.VerpakkingsEenheid),
+            CAST(mag.VerpakkingsEenheid AS UNSIGNED),
+            mag.VerpakkingsEenheid
+        ) AS Eenheid,
+        dl.DatumLevering
+    FROM Product prd
+    JOIN Magazijn mag
+        ON mag.ProductId = prd.Id
+    JOIN (
+        SELECT ProductId, MAX(DatumLevering) AS DatumLevering
+        FROM ProductPerLeverancier
+        WHERE LeverancierId = lvrn_id
+        GROUP BY ProductId
+    ) dl
+        ON dl.ProductId = prd.Id;
 END $$
-
 DELIMITER ;

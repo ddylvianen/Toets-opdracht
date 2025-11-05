@@ -19,6 +19,7 @@ class LeverancierModel extends Model
 
     }
     
+    
     public static function sp_getleverancierbyid($id){
         return DB::selectOne('CALL SP_GetLeverancierById(:id)', ['id'=>$id]);
     }

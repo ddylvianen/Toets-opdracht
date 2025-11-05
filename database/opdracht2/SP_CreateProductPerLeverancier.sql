@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS SP_GetAllProductenperleverancier;
+
 DELIMITER $$
 
 CREATE PROCEDURE SP_GetAllProductenperleverancier(
@@ -6,9 +7,11 @@ CREATE PROCEDURE SP_GetAllProductenperleverancier(
 )
 BEGIN
     SELECT
-        prd.Naam
+        prd.Id
+        ,prd.Naam
         ,mag.AantalAanwezig AS Aantal
-        ,IF(mag.VerpakkingsEenheid % 1 = 0,ROUND(mag.VerpakkingsEenheid),
+        ,IF(FLOOR(mag.VerpakkingsEenheid) = mag.VerpakkingsEenheid,
+        ROUND(mag.VerpakkingsEenheid),
         mag.VerpakkingsEenheid) AS Eenheid
         ,MAX(ppl.`DatumLevering`) AS `DatumLevering`
     FROM
@@ -27,4 +30,4 @@ BEGIN
         Eenheid;
 END $$
 
-DELIMITER ;
+DELIMITER;
