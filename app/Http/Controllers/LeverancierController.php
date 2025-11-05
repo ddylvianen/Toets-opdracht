@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\LeverancierModel;
-use PhpParser\Node\Stmt\Continue_;
+use Illuminate\Http\Request;
 
 class LeverancierController 
 {
@@ -17,7 +16,21 @@ class LeverancierController
         ]);
     }
 
-    public function productenperleverancier(){
-        return 'hi';
+    public function show($id){
+        $leverancier = LeverancierModel::sp_getleverancierbyid($id);
+        $producten = LeverancierModel::sp_getallproductenperleverancier($id);
+        return dd($leverancier, $producten);
     }
+
+    public function create(){
+       return view('leveranciers.create');
+    }
+
+    public function store(Request $request){
+        $validated = $request->validate([]);
+
+        return 1;
+    }
+
+
 }

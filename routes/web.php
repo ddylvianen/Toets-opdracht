@@ -47,7 +47,7 @@ Route::get('/allergeen/{id}', [AllergeenController::class, 'show'])->name('aller
 Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leverancier.index');
 
 // Tonen van producten info
-Route::get('/producten/{id}', [LeverancierController::class,'productenperleverancier'])->name('leverancier.producteninfo');
+Route::get('/producten/{id}', [LeverancierController::class,'show'])->name('leverancier.producteninfo');
 // Dashboard (met auth middleware)
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

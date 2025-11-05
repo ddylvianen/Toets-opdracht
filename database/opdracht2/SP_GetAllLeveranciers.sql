@@ -1,5 +1,4 @@
 DROP PROCEDURE IF EXISTS SP_GetAllLeveranciers;
-DROP PROCEDURE IF EXISTS SP_GetAllProductenperleverancier;
 DELIMITER $$
 
 CREATE PROCEDURE SP_GetAllLeveranciers()
@@ -18,13 +17,5 @@ BEGIN
         Leverancier AS lvn;
 END$$
 
-CREATE PROCEDURE SP_GetAllProductenperleverancier()
-BEGIN
-    SELECT
-
-
-    FROM
-        
-DELIMITER ;
 
 
